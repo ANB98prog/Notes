@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
+using Notes.WebApi.Middleware;
 using System.Reflection;
 
 namespace Notes.WebApi
@@ -29,6 +29,7 @@ namespace Notes.WebApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseCors("AllowAll");
