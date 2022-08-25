@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Notes.Application.Interfaces;
 
 namespace Notes.Persistence
 {
@@ -14,8 +15,8 @@ namespace Notes.Persistence
             {
                 options.UseSqlite(connectionString);
             });
-            services.AddScoped<NotesDbContext>(provider =>
-                            provider.GetService<NotesDbContext>());
+            
+            services.AddTransient<INotesDbContext>(s => s.GetRequiredService<NotesDbContext>());
 
             return services;
         }
