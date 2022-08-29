@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Notes.Commands.UpdateNote;
+using System.ComponentModel.DataAnnotations;
 
 namespace Notes.WebApi.Models
 {
@@ -12,6 +13,7 @@ namespace Notes.WebApi.Models
         /// <summary>
         /// Note id
         /// </summary>
+        [Required]
         public Guid Id { get; set; }
 
         /// <summary>

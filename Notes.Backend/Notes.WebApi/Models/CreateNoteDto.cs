@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Notes.Commands.CreateNote;
+using System.ComponentModel.DataAnnotations;
 
 namespace Notes.WebApi.Models
 {
@@ -12,6 +13,7 @@ namespace Notes.WebApi.Models
         /// <summary>
         /// Note title
         /// </summary>
+        [Required]
         public string Title { get; set; }
 
         /// <summary>
