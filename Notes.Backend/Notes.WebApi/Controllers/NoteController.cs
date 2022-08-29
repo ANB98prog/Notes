@@ -13,8 +13,10 @@ namespace Notes.WebApi.Controllers
     /// <summary>
     /// Controller to work with notes
     /// </summary>
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class NoteController : BaseController
     {
         /// <summary>
