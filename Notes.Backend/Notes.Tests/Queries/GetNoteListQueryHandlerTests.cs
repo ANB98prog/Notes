@@ -3,11 +3,6 @@ using Notes.Application.Notes.Queries.GetNoteList;
 using Notes.Persistence;
 using Notes.Tests.Common;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Notes.Tests.Queries
 {
