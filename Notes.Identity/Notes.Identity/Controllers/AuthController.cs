@@ -115,14 +115,16 @@ namespace Notes.Identity.Controllers
 
             var user = new AppUser
             {
-                UserName = viewModel.Username
+                UserName = viewModel.Username,
+                FirstName = viewModel.Name,
+                LastName = viewModel.Surname
             };
 
             var result = await _userManager.CreateAsync(user, viewModel.Password);
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, false);
+                await _signInManager.PasswordSignInAsync(user, viewModel.Password, isPersistent: false, lockoutOnFailure: false);
                 return Redirect(viewModel.ReturnUrl);
             }
 

@@ -70,7 +70,7 @@ namespace Notes.Identity
                 .AddInMemoryApiResources(Configuration.ApiResources)
                 .AddInMemoryIdentityResources(Configuration.IdentityResources)
                 .AddInMemoryApiScopes(Configuration.ApiScopes)
-                .AddInMemoryClients(Configuration.Clients)
+                .AddInMemoryClients(Configuration.Clients)                
                 .AddDeveloperSigningCredential();
 
             services.ConfigureApplicationCookie(config =>

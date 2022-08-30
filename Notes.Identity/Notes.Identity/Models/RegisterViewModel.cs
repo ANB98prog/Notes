@@ -8,6 +8,18 @@ namespace Notes.Identity.Models
         /// User name
         /// </summary>
         [Required]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// User surname
+        /// </summary>
+        [Required]
+        public string Surname { get; set; }
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        [Required]
         public string Username { get; set; }
 
         /// <summary>
