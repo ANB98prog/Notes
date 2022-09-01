@@ -2,7 +2,7 @@ import { UserManager, UserManagerSettings } from 'oidc-client';
 import { setAuthHeader } from './auth-headers';
 
 const userManagerSettings: UserManagerSettings = {
-    client_id: 'notes-web-api',
+    client_id: 'notes-web-app',
     redirect_uri: 'http://localhost:3000/signin-oidc',
     response_type: 'code',
     scope: 'openid profile NotesWebAPI',

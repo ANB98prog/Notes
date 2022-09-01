@@ -6,7 +6,7 @@ const apiClient = new Client('https://localhost:7222');
 
 async function createNote(note: CreateNoteDto) {
     await apiClient.create('1.0', note);
-    console.log('Note is created');
+    console.log('Note is created.');
 }
 
 const NoteList: FC<{}> = (): ReactElement => {
@@ -22,9 +22,8 @@ const NoteList: FC<{}> = (): ReactElement => {
         setTimeout(getNotes, 500);
     }, []);
 
-
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if(event.key === 'Enter') {
+        if (event.key === 'Enter') {
             const note: CreateNoteDto = {
                 title: event.currentTarget.value,
             };
@@ -38,15 +37,14 @@ const NoteList: FC<{}> = (): ReactElement => {
         <div>
             Notes
             <div>
-                <FormControl ref={textInput} onKeyPress={handleKeyPress} /> 
+                <FormControl ref={textInput} onKeyPress={handleKeyPress} />
             </div>
             <section>
                 {notes?.map((note) => (
                     <div>{note.title}</div>
-                )) }
+                ))}
             </section>
         </div>
-    )
+    );
 };
-
 export default NoteList;
