@@ -19,7 +19,7 @@ namespace Notes.WebApi.Models
         /// <summary>
         /// Note details
         /// </summary>
-        public string Details { get; set; }
+        public string Details { get; set; } = string.Empty;
 
         public void Mapping(Profile profile)
         {
