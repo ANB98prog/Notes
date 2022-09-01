@@ -34,7 +34,7 @@ namespace Notes.Identity
             {
                 new Client
                 {
-                    ClientId = "notes-web-api",
+                    ClientId = "notes-web-app",
                     ClientName = "Notes Web",
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireClientSecret = false,
