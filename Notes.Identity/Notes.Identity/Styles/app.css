@@ -1,8 +1,28 @@
-﻿.input {
+﻿body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.form {
+    width: 320px;
+    border: 1px solid;
+    border-radius: 5px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 0 20px 0;
+    background-color: #8ecae6;
+    color: #fff;
+}
+
+.input {
     font-size: 16px;
     font-family: Arial;
     background-color: #fff;
-    width: 100%;
 }
 
 .header {
@@ -14,16 +34,30 @@
 
 .button {
     font-size: 16px;
-    background-color: #a191bd;
+    background-color: #8ecae6;
     border-radius: 4px;
     color: #332600;
     font-family: Arial;
-    width: 100%;
+    width: 70%;
 }
 
 .block {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 10px;
 }
+
+    .block div {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+
+        .block div label {
+            margin-bottom: 5px;
+        }
 
 .switch-button {
     margin-top: 8px;
@@ -33,5 +67,5 @@
     font-family: Arial;
     display: inline-block;
     text-align: center;
-    width: 100%;
+    width: 70%;
 }
