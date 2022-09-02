@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@types/react-router-dom": "^5.3.3",
-    "oidc-client": "^1.11.5",
-    "react-bootstrap": "^2.5.0",
-    "react-router-dom": "^6.3.0"
-  }
-}
