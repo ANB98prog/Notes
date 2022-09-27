@@ -6,6 +6,8 @@ using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
 using Notes.WebApi.Middleware;
+using Notes.WebApi.Services;
+using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
@@ -15,6 +17,11 @@ namespace Notes.WebApi
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+                .WriteTo.File("NotesWebAppLog-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
@@ -24,37 +31,46 @@ namespace Notes.WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+            builder.Host.UseSerilog();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            try
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(config =>
+                var app = builder.Build();
+
+                // Configure the HTTP request pipeline.
+                if (app.Environment.IsDevelopment())
                 {
-                    var provider = app.Services.GetService<IApiVersionDescriptionProvider>();
-
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    app.UseSwagger();
+                    app.UseSwaggerUI(config =>
                     {
-                        config.SwaggerEndpoint(
-                            $"/swagger/{description.GroupName}/swagger.json",
-                            description.GroupName.ToUpperInvariant());
-                    }
-                });
+                        var provider = app.Services.GetService<IApiVersionDescriptionProvider>();
+
+                        foreach (var description in provider.ApiVersionDescriptions)
+                        {
+                            config.SwaggerEndpoint(
+                                $"/swagger/{description.GroupName}/swagger.json",
+                                description.GroupName.ToUpperInvariant());
+                        }
+                    });
+                }
+
+                app.UseCustomExceptionHandler();
+                app.UseHttpsRedirection();
+                app.UseCors("AllowAll");
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.UseApiVersioning();
+
+                app.MapControllers();
+
+                app.Run();
             }
-
-            app.UseCustomExceptionHandler();
-            app.UseHttpsRedirection();            
-            app.UseCors("AllowAll");
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseApiVersioning();
-
-            app.MapControllers();
-
-            app.Run();
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "An error occured while app initialization");
+            }
         }
 
         private static void ConfigureAppServices(IServiceCollection services, IConfiguration configuration)
@@ -104,6 +120,9 @@ namespace Notes.WebApi
                 ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
             services.AddApiVersioning();
+
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddHttpContextAccessor();
         }
     }
 }
