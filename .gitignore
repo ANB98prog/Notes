@@ -366,3 +366,4 @@ FodyWeavers.xsd
 *.db
 *.db-shm
 *.db-wal
+/Notes.Backend/Notes.WebApi/NotesWebAppLog-20220927.txt
